@@ -1,9 +1,10 @@
-import React from 'react';
+import React from 'react'
+import styles from './Footer.less'
 
 const Footer = (props) => {
   return (
-    <div>
-      Footer
+    <div className={styles.container}>
+      Ant Design 版权所有 © 2015 由蚂蚁金服体验技术部支持
     </div>
   );
 };

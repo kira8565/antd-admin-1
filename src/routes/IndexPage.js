@@ -3,6 +3,9 @@ import { connect } from 'dva'
 import { Link } from 'dva/router'
 import styles from './IndexPage.less'
 import Login from '../components/Login'
+import Header from '../components/Layout/Header'
+import Footer from '../components/Layout/Footer'
+import Sidebar from '../components/Layout/Sidebar'
 
 function IndexPage ({ location, dispatch, index }) {
   const { logining, isLogin } = index
@@ -18,14 +21,34 @@ function IndexPage ({ location, dispatch, index }) {
       })
     }
   }
+  const headerProps = {
+    onLogout() {
+      dispatch({
+        type: 'index/logout'
+      })
+    }
+  }
 
   if (!isLogin) {
     return <Login {...loginProps} />
   }
 
   return (
-    <div>
-      wef
+    <div className={styles.container}>
+      <aside className={styles.aside}>
+        <Sidebar />
+      </aside>
+      <div className={styles.main}>
+        <Header {...headerProps} />
+        <div className={styles.margin}>
+          <div className={styles.content}>
+            <div style={{ height: 590 }}>
+              内容区域
+            </div>
+          </div>
+        </div>
+        <Footer />
+      </div>
     </div>
   )
 }

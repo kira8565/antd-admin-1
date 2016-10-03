@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './Login.less'
+import styles from './Login.less'
 import { Button, Form, Input } from 'antd'
 const FormItem = Form.Item
 
@@ -17,8 +17,8 @@ const Login = ({ logining, form, onLogin }) => {
   }
 
   return (
-    <div className={style.container}>
-      <div className={style.title}>
+    <div className={styles.container}>
+      <div className={styles.title}>
         <span>管理员登录</span>
       </div>
       <Form horizontal onSubmit={handleSubmit}>
