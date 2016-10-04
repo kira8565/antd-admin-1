@@ -7,7 +7,7 @@ import Header from '../components/Layout/Header'
 import Footer from '../components/Layout/Footer'
 import Sidebar from '../components/Layout/Sidebar'
 
-function IndexPage ({ location, dispatch, index }) {
+function IndexPage ({ location, dispatch, index, children }) {
   const { logining, isLogin } = index
 
   const loginProps = {
@@ -43,7 +43,7 @@ function IndexPage ({ location, dispatch, index }) {
         <div className={styles.margin}>
           <div className={styles.content}>
             <div style={{ height: 590 }}>
-              内容区域
+              {children}
             </div>
           </div>
         </div>
