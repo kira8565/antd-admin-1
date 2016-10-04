@@ -1,8 +1,10 @@
 import React from 'react'
 import { Form, Input, Button, Select } from 'antd'
 import styles from './Search.less'
+const Option = Select.Option
+const FormItem = Form.Item
+const Search = ({form, onSearch, onAdd}) => {
 
-const Search = ({form, field, keyword, onSearch, onAdd}) => {
 
   const { getFieldDecorator, validateFields, getFieldsValue } = form
   function handleSubmit (e) {
@@ -19,29 +21,41 @@ const Search = ({form, field, keyword, onSearch, onAdd}) => {
     <div className={styles.normal}>
       <div className={styles.search}>
         <Form inline onSubmit={handleSubmit}>
-          <Form.Item>
-            <Select>
-              <Select.Option value='name'>
-                名字
-              </Select.Option>
-              <Select.Option value='address'>
-                地址
-              </Select.Option>
+          <FormItem>
+            <Select defaultValue='name' style={{ width: 65 }}>
+              <Option value='name'>
+                姓名
+              </Option>
+              <Option value='sex'>
+                性别
+              </Option>
             </Select>
-          </Form.Item>
-          <Form.Item hasFeedback>
-            <Input />
-          </Form.Item>
-          <Button style={{ marginRight: '10px' }} type='primary' htmlType='submit'>
-            搜索
-          </Button>
+          </FormItem>
+          <FormItem hasFeedback style={{marginBottom: 0}}>
+            {getFieldDecorator('keyword', {
+               validate: [{
+                 rules: [
+                   { required: true, message: '不能为空' }
+                 ],
+                 trigger: ['onBlur', 'onChange']
+               }]
+             })(
+               <Input placeholder='完整关键词' />
+             )}
+          </FormItem>
+          <FormItem>
+            <Button style={{ marginRight: '10px' }} type='primary' htmlType='submit'>
+              搜索
+            </Button>
+          </FormItem>
         </Form>
       </div>
-      <div className={styles.create}>
-        <Button type='ghost' onClick={onAdd}>
+      <div>
+        <Button type='ghost' size='large' onClick={onAdd}>
           添加
         </Button>
       </div>
+
     </div>
   )
 }

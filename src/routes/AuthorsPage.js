@@ -1,18 +1,16 @@
 import React from 'react'
 import List from '../components/Authors/List'
 import Search from '../components/Authors/Search'
-import Modal from '../components/Authors/Modal'
+import Pop from '../components/Authors/Pop'
 import { connect } from 'dva'
 // TODO
 import { routerRedux } from 'dva/router'
 
-const AuthorsPage = ({ location, dispatch, authors, modalVisible, modalType, currentItem }) => {
-  const { field, keyword } = location.query
-  // 这个要改
-  console.log(location)
+const AuthorsPage = ({ location, dispatch, authors}) => {
+  // console.log(authors)
+  const { list, loading, total, current, currentItem, modalType, modalVisible } = authors
+
   const searchProps = {
-    field,
-    keyword,
     onSearch(fieldsValue) {
       dispatch({
         type: 'authors/query',
@@ -29,508 +27,56 @@ const AuthorsPage = ({ location, dispatch, authors, modalVisible, modalType, cur
     }
   }
 
-  const listProps = {
-    loading: false,
-    pagination: {
-      total: 30,
-      current: 1,
-      showSizeChanger: true,
-      showQuickJumper: true,
-      showTotal: total => `共 ${total} 条`,
-      onShowSizeChange(current, pageSize) {
-        console.log('Current: ', current, '; PageSize: ', pageSize)
-      },
-      onChange(current) {
-        console.log('Current: ', current)
-      }
-    },
-    dataSource: [
-      {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }, {
-        name: '张三',
-        age: 23,
-        address: '成都'
-      },
-      {
-        name: '李四',
-        age: 24,
-        address: '杭州'
-      },
-      {
-        name: '王五',
-        age: 25,
-        address: '上海'
-      }
-    ]
-  }
-  const modalProps = {
+  const popProps = {
     item: modalType === 'create' ? {} : currentItem,
-    type: modalType,
+    type: modalType === 'create' ? '新增作者' : '修改作者',
     visible: modalVisible,
     onOk(data) {
       dispatch({
-        type: `users/${modalType}`,
+        type: `authors/${modalType}`,
         payload: data
       })
     },
     onCancel() {
       dispatch({
-        type: 'users/hideModal'
+        type: 'authors/hideModal'
       })
     }
   }
+
+  const listProps = {
+    dataSource: list,
+    loading,
+    total,
+    current,
+    onPageChange(page) {
+      dispatch(routerRedux.push({
+        pathname: '/authors',
+        query: { page}
+      }))
+    },
+    onDeleteItem(id) {
+      dispatch({
+        type: 'authors/delete',
+        payload: id
+      })
+    },
+    onEditItem(item) {
+      dispatch({
+        type: 'authors/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item
+        }
+      })
+    }
+  }
+
   return (
     <div>
-      <Search />
+      <Search {...searchProps} />
+      <Pop {...popProps} />
       <List {...listProps} />
-      <Modal {...modalProps} />
     </div>
   )
 }
