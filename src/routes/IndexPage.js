@@ -10,6 +10,10 @@ import Sidebar from '../components/Layout/Sidebar'
 function IndexPage ({ location, dispatch, index, children }) {
   const { logining, isLogin } = index
 
+  const sidebarProps = {
+    active: [location.pathname]
+  }
+
   const loginProps = {
     logining,
     onLogin({ account, password }) {
@@ -36,15 +40,13 @@ function IndexPage ({ location, dispatch, index, children }) {
   return (
     <div className={styles.container}>
       <aside className={styles.aside}>
-        <Sidebar />
+        <Sidebar {...sidebarProps} />
       </aside>
       <div className={styles.main}>
         <Header {...headerProps} />
         <div className={styles.margin}>
           <div className={styles.content}>
-            <div style={{ height: 590 }}>
-              {children}
-            </div>
+            {children}
           </div>
         </div>
         <Footer />

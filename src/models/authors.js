@@ -3,7 +3,15 @@ export default {
 
   namespace: 'authors',
 
-  state: {},
+  state: {
+    list: [],
+    loading: false,
+    total: null,
+    current: 1,
+    currentItem: {},
+    modalVisible: false,
+    modalType: 'create'
+  },
 
   subscriptions: {
     setup({ dispatch, history }) {
@@ -18,6 +26,12 @@ export default {
   reducers: {
     fetch(state, action) {
       return { ...state, ...action.payload };
+    },
+    showModal(state, action) {
+      return { ...state, ...action.payload, modalVisible: true };
+    },
+    hideModal(state) {
+      return { ...state, modalVisible: false };
     },
   },
 

@@ -6,14 +6,14 @@ const FormItem = Form.Item
 const Login = ({ logining, form, onLogin }) => {
 
   const { getFieldDecorator, validateFields, getFieldsValue } = form
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit (e) {
+    e.preventDefault()
     validateFields((errors) => {
       if (!!errors) {
-        return;
+        return
       }
       onLogin(getFieldsValue())
-    });
+    })
   }
 
   return (

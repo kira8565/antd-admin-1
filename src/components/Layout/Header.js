@@ -5,14 +5,8 @@ const SubMenu = Menu.SubMenu
 
 const Header = ({ onLogout }) => {
   return (
-    <div>
-      <Menu mode='horizontal'>
-        <SubMenu className={styles.submenu} title={<span><Icon type="user" />admin</span>}>
-          <Menu.Item className={styles.item} key='logout'>
-            <a onClick={onLogout}>注销</a>
-          </Menu.Item>
-        </SubMenu>
-      </Menu>
+    <div className={styles.container}>
+      <span onClick={onLogout}><Icon type="user" />登出</span>
     </div>
   )
 }
