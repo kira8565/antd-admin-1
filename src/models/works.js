@@ -1,3 +1,5 @@
+import { getSelectAllAuthors } from '../services/works'
+import { parse } from 'qs';
 
 export default {
 
@@ -10,20 +12,39 @@ export default {
     current: 1,
     currentItem: {},
     modalVisible: false,
-    modalType: 'create'
+    modalType: 'create',
+    selectAllAuthors: []
   },
 
   subscriptions: {
     setup({ dispatch, history }) {
+      history.listen(location => {
+        if (location.pathname === '/works') {
+          dispatch({
+            type: 'query',
+            payload: location.query
+          });
+        }
+      });
     },
   },
 
   effects: {
-    *fetchRemote({ payload }, { call, put }) {
+    *query({ payload }, { select, call, put }) {
+      yield put({ type: 'showLoading' })
+      const {result} = yield call(getSelectAllAuthors)
+      console.log(result)
+        yield put({
+          type: 'getSelectAllAuthorsSuccess',
+          payload: result
+        });
     },
   },
 
   reducers: {
+    getSelectAllAuthorsSuccess(state, action){
+      return { ...state, selectAllAuthors: action.payload };
+    },
     showLoading(state) {
       return { ...state, loading: true };
     },

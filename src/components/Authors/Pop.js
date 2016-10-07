@@ -11,38 +11,79 @@ const formItemLayout = {
     span: 14
   }
 }
+const uploadProp = {
+  multiple: false,
+  beforeUpload(file) {
+    const isJPG = file.type === 'image/jpeg';
+    if (!isJPG) {
+      message.error('只能上传jpg文件');
+    }
+    return isJPG;
+  },
+  action: "http://localhost:3000/api/upload",
+  listType: "picture"
+}
+// ,
+//   defaultFileList: [{
+//       uid: -1,
+//       name: 'xxx.png',
+//       status: 'done',
+//       url: item.avator ,
+//       thumbUrl: item.avator ,
+//     }]
 
 function Pop ({ form, item, type, visible, onOk, onCancel }) {
-  const { getFieldDecorator, validateFields, getFieldsValue, setFieldsValue } = form
-  // const { avator, name, nickname, sex, age, introduce } = item
-  // console.log(avator, name, nickname, sex, age, introduce)
+  const { getFieldDecorator, validateFields, getFieldsValue, setFieldsValue,resetFields } = form
 
   function handleUpload(info) {
-    if (info.file.status !== 'uploading') {
+    if(getFieldsValue().fake && getFieldsValue().fake.fileList.length === 0) {
+      setFieldsValue({['avator']: undefined })
+      return
+    }
 
+    if (info.file.status !== 'uploading') {
       console.log(info.file.response);
     }
     if (info.file.status === 'done') {
       message.success(`${info.file.name} 图片上传成功`);
+      if(getFieldsValue().fake.fileList.length>1){
+        getFieldsValue().fake.fileList.shift()
+      }
+      const url = getFieldsValue().fake.file.response.data.url
+      setFieldsValue({['avator']: url } )
+
     } else if (info.file.status === 'error') {
       message.error(`${info.file.name} 图片上传失败`);
     }
   }
+
+      
+
   function handleOk () {
-    
+    console.log(getFieldsValue())
     validateFields((errors) => {
       if (!!errors) {
         return
       }
+      console.log('验证通过')
       console.log(getFieldsValue())
-      const {avator} = getFieldsValue()
-      onOk({...getFieldsValue(), avator:avator.file.response.data.url})
+      onOk({...getFieldsValue()})
+      resetFields()
     })
   }
 
   function handleCancel () {
-    onCancel(item)
+    resetFields()
+    onCancel()
   }
+  function checkAvator(rule, value, callback) {
+    if(!getFieldsValue().avator) {
+      callback('必须上传一张图片')
+    } else {
+      callback()
+    }
+  }
+
 
   const modalOpts = {
     title: type,
@@ -51,24 +92,58 @@ function Pop ({ form, item, type, visible, onOk, onCancel }) {
     onCancel: handleCancel
   }
 
+// console.log(item.avator)
+
+function q (){
+  if(item.avator){
+    return [{
+      uid: -1,
+      name: 'xxx.png',
+      status: 'done',
+      url: item.avator ,
+      thumbUrl: item.avator ,
+    }]
+  } else{
+    return
+  }
+}
+
+
+
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
 
-        <FormItem label="头像：" {...formItemLayout}>
+
+
+<FormItem label="头像：" {...formItemLayout} hasFeedback>
+    {getFieldDecorator('fake', {
+      rules: [
+        { validator: checkAvator },
+      ],
+    })(
+      <Upload {...uploadProp} onChange={handleUpload}   >
+      <Button type="ghost">
+        <Icon type="upload" /> 点击上传
+        </Button>
+      </Upload>
+    )}
+ </FormItem>
+
+
+
+        <FormItem label='头像：'  {...formItemLayout} style={{display:'none'}}>
           {getFieldDecorator('avator', {
-          })(
-            <Upload action="http://localhost:3000/api/upload" listType="picture" onChange={handleUpload}>
-              <Button type="ghost">
-                <Icon type="upload" /> 点击上传
-              </Button>
-            </Upload>
-          )}
+              initialValue: item.avator || undefined,
+            })(
+              <Input autoComplete="off"/>
+            )}
         </FormItem>
+
 
         <FormItem label='姓名：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('name', {
-              // initialValue: 'item.name' || '',
+              initialValue: item.name || undefined,
               validate: [{
                 rules: [
                   { required: true, message: '不能为空' }
@@ -76,13 +151,13 @@ function Pop ({ form, item, type, visible, onOk, onCancel }) {
                 trigger: ['onBlur', 'onChange']
               }]
             })(
-              <Input/>
+              <Input autoComplete="off"/>
             )}
         </FormItem>
 
         <FormItem label='昵称：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('nickname', {
-              // initialValue: item.nickname || '',
+              initialValue: item.nickname || undefined,
               validate: [{
                 rules: [
                   { required: true, message: '不能为空' }
@@ -90,13 +165,13 @@ function Pop ({ form, item, type, visible, onOk, onCancel }) {
                 trigger: ['onBlur', 'onChange']
               }]
             })(
-              <Input />
+              <Input autoComplete="off"/>
             )}
         </FormItem>
 
         <FormItem label='性别：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('sex', {
-            // initialValue: item.sex || '男',
+            initialValue: item.sex || '男',
             rules: [
               { required: true, message: '请选择性别' },
             ],
@@ -110,14 +185,15 @@ function Pop ({ form, item, type, visible, onOk, onCancel }) {
 
         <FormItem label='年龄：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('age', { 
-            // initialValue: item.age || 20 
+            initialValue: item.age || 20 
           })(
             <InputNumber min={1} max={150} style={{ width: 100 }} />
           )}
         </FormItem>
+
         <FormItem label='介绍：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('introduce', {
-              // initialValue: item.introduce || '',
+              initialValue: item.introduce || undefined,
               validate: [{
                 rules: [
                   { required: true, message: '不能为空' }
@@ -125,9 +201,10 @@ function Pop ({ form, item, type, visible, onOk, onCancel }) {
                 trigger: ['onBlur', 'onChange']
               }]
             })(
-              <Input type="textarea"/>
+              <Input type="textarea" autoComplete="off"/>
             )}
         </FormItem>
+
       </Form>
     </Modal>
   )

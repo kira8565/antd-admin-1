@@ -37,9 +37,7 @@ const AuthorsPage = ({ location, dispatch, authors}) => {
         payload: data
       })
     },
-    onCancel(item) {
-      // console.log('cancel')
-      // console.log(item)
+    onCancel() {
       dispatch({
         type: 'authors/hideModal'
       })

@@ -1,5 +1,12 @@
-import request from '../utils/request'
+import reqwest from 'reqwest'
 
-export async function query() {
-  return request('/api/users')
+import qs from 'qs';
+
+
+
+export async function getSelectAllAuthors() {
+  return reqwest({
+    url: 'http://localhost:3000/api/getSelectAllAuthors',
+    method: 'get'
+  })
 }

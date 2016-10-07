@@ -7,7 +7,7 @@ import { routerRedux } from 'dva/router'
 
 const WorksPage = ({ location, dispatch, works}) => {
 
-  const { list, loading, total, current, currentItem, modalType, modalVisible } = works
+  const { list, loading, total, current, currentItem, modalType, modalVisible,selectAllAuthors } = works
   const searchProps = {
     onSearch(fieldsValue) {
       dispatch({
@@ -26,8 +26,9 @@ const WorksPage = ({ location, dispatch, works}) => {
   }
 
   const popProps = {
+    selectAllAuthors,
     item: modalType === 'create' ? {} : currentItem,
-    type: modalType === 'create' ? '新增作者' : '修改作者',
+    type: modalType === 'create' ? '新增作品' : '修改作品',
     visible: modalVisible,
     onOk(data) {
       dispatch({

@@ -32,7 +32,6 @@ export default {
     *query({ payload }, { select, call, put }) {
       yield put({ type: 'showLoading' });
       const { data } = yield call(query, parse(payload));
-      console.log(1)
       if (data && data.success) {
         yield put({
           type: 'querySuccess',
