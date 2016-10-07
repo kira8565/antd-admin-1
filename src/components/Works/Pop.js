@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Form, Input, Modal, Select, InputNumber, Upload, Button, Icon ,message} from 'antd'
+import { Form, Input, Modal, Select, InputNumber, Upload, Button, Icon } from 'antd'
 const FormItem = Form.Item
 const Option = Select.Option
 
@@ -17,26 +17,15 @@ function Pop ({ form, item, type, visible, onOk, onCancel }) {
   // const { avator, name, nickname, sex, age, introduce } = item
   // console.log(avator, name, nickname, sex, age, introduce)
 
-  function handleUpload(info) {
-    if (info.file.status !== 'uploading') {
+  function handleUpload() {
 
-      console.log(info.file.response);
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} 图片上传成功`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} 图片上传失败`);
-    }
   }
   function handleOk () {
-    
     validateFields((errors) => {
       if (!!errors) {
         return
       }
-      console.log(getFieldsValue())
-      const {avator} = getFieldsValue()
-      onOk({...getFieldsValue(), avator:avator.file.response.data.url})
+      onOk({...getFieldsValue(), avator:'https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg'})
     })
   }
 
@@ -58,7 +47,7 @@ function Pop ({ form, item, type, visible, onOk, onCancel }) {
         <FormItem label="头像：" {...formItemLayout}>
           {getFieldDecorator('avator', {
           })(
-            <Upload action="http://localhost:3000/api/upload" listType="picture" onChange={handleUpload}>
+            <Upload action="/upload.do" listType="picture" onChange={handleUpload}>
               <Button type="ghost">
                 <Icon type="upload" /> 点击上传
               </Button>

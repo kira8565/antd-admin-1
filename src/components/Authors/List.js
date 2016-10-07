@@ -6,7 +6,6 @@ const List = ({ total, current, loading, dataSource, onPageChange, onDeleteItem,
 
 
 
-
   const columns = [
     {
     title: 'id',
@@ -17,16 +16,20 @@ const List = ({ total, current, loading, dataSource, onPageChange, onDeleteItem,
     title: '头像',
     dataIndex: 'avator',
     key: 'avator',
+    render: text => <img width='24' src={text} />,
   },{
     title: '姓名',
     dataIndex: 'name',
     key: 'name',
-    render: (text) => <a href="#">{text}</a>,
   }, {
-    title: '英文名',
-    dataIndex: 'nickName',
-    key: 'nickName',
+    title: '昵称',
+    dataIndex: 'nickname',
+    key: 'nickname',
   }, {
+    title: '性别',
+    dataIndex: 'sex',
+    key: 'sex',
+  },{
     title: '年龄',
     dataIndex: 'age',
     key: 'age',
@@ -35,17 +38,13 @@ const List = ({ total, current, loading, dataSource, onPageChange, onDeleteItem,
     dataIndex: 'introduce',
     key: 'introduce',
   }, {
-    title: '住址',
-    dataIndex: 'address',
-    key: 'address',
-  }, {
     title: '创建时间',
-    dataIndex: 'createTime',
-    key: 'createTime',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
   }, {
     title: '更新时间',
-    dataIndex: 'updateTime',
-    key: 'updateTime',
+    dataIndex: 'updatedAt',
+    key: 'updatedAt',
   }, {
     title: '操作',
     key: 'operation',
@@ -67,14 +66,17 @@ const List = ({ total, current, loading, dataSource, onPageChange, onDeleteItem,
   return (
     <div>
       <Table
+        bordered
+        size="small"
         columns={columns}
         dataSource={dataSource}
         loading={loading}
         rowKey={record => record.id}
         pagination={false}
+        className={styles.table}
       />
       <Pagination
-        className="ant-table-pagination"
+        className={styles.pagination}
         total={total}
         current={current}
         pageSize={10}
