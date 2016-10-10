@@ -4,7 +4,7 @@ import styles from './Footer.less'
 const Footer = (props) => {
   return (
     <div className={styles.container}>
-      Ant Design 版权所有 © 2015 由蚂蚁金服体验技术部支持
+      Emerge Demo 版权所有 © 2015 由北京那个网络技术部支持
     </div>
   );
 };

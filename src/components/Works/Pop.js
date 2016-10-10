@@ -1,5 +1,9 @@
 import React, { PropTypes } from 'react'
 import { Form, Input, Modal, Select, InputNumber, Upload, Button, Icon ,message} from 'antd'
+import ColorThief from '../../utils/color-thief.js'
+const colorThief = new ColorThief();
+
+
 const FormItem = Form.Item
 const Option = Select.Option
 
@@ -23,14 +27,6 @@ const uploadProp = {
   action: "http://localhost:3000/api/upload",
   listType: "picture"
 }
-// ,
-//   defaultFileList: [{
-//       uid: -1,
-//       name: 'xxx.png',
-//       status: 'done',
-//       url: item.avator ,
-//       thumbUrl: item.avator ,
-//     }]
 
 function Pop ({ form, item, type, visible, onOk, onCancel,selectAllAuthors }) {
   const { getFieldDecorator, validateFields, getFieldsValue, setFieldsValue,resetFields } = form
@@ -55,6 +51,12 @@ function Pop ({ form, item, type, visible, onOk, onCancel,selectAllAuthors }) {
       }
       const url = getFieldsValue().fake.file.response.data.url
       setFieldsValue({['img']: url } )
+      const img = new Image();
+      img.src = url;
+      img.onload = ()=>{
+        const color = colorThief.getColor(img)
+        setFieldsValue({['color']: color.toString() } )
+      }
 
     } else if (info.file.status === 'error') {
       message.error(`${info.file.name} 图片上传失败`);
@@ -69,8 +71,6 @@ function Pop ({ form, item, type, visible, onOk, onCancel,selectAllAuthors }) {
       if (!!errors) {
         return
       }
-      console.log('验证通过')
-      console.log(getFieldsValue())
       onOk({...getFieldsValue()})
       resetFields()
     })
@@ -103,39 +103,19 @@ function Pop ({ form, item, type, visible, onOk, onCancel,selectAllAuthors }) {
     <Modal {...modalOpts}>
       <Form horizontal>
 
-        <FormItem label='作者：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('AuthorId', {
-            initialValue: item.AuthorId || '',
-            // rules: [
-            //   { required: true, message: '请选择作者' },
-            // ],
-          })(
-          <Select style={{ width: 60 }}>
-          {
-            selectAllAuthors.map((item,index)=>{
-              return(<Option value={item.id} key={index}>{item.name}</Option>)
-            })
-          }
-            
-          </Select>
-          )}
+        <FormItem label="作品图片：" {...formItemLayout} hasFeedback>
+            {getFieldDecorator('fake', {
+              rules: [
+                { validator: checkAvator },
+              ],
+            })(
+              <Upload {...uploadProp} onChange={handleUpload}   >
+              <Button type="ghost">
+                <Icon type="upload" /> 点击上传
+                </Button>
+              </Upload>
+            )}
         </FormItem>
-
-<FormItem label="作品图片：" {...formItemLayout} hasFeedback>
-    {getFieldDecorator('fake', {
-      rules: [
-        { validator: checkAvator },
-      ],
-    })(
-      <Upload {...uploadProp} onChange={handleUpload}   >
-      <Button type="ghost">
-        <Icon type="upload" /> 点击上传
-        </Button>
-      </Upload>
-    )}
- </FormItem>
-
-
 
         <FormItem label='作品图片：'  {...formItemLayout} style={{display:'none'}}>
           {getFieldDecorator('img', {
@@ -144,7 +124,6 @@ function Pop ({ form, item, type, visible, onOk, onCancel,selectAllAuthors }) {
               <Input autoComplete="off"/>
             )}
         </FormItem>
-
 
         <FormItem label='作品名称：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('name', {
@@ -174,11 +153,46 @@ function Pop ({ form, item, type, visible, onOk, onCancel,selectAllAuthors }) {
             )}
         </FormItem>
 
+        <FormItem label='作者：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('AuthorId', {
+            initialValue: !!item.AuthorId?item.AuthorId+'':undefined,
+            rules: [
+              { required: true, message: '请选择作者' },
+            ],
+          })(
+          <Select style={{ width: 60 }}>
+          {
+            selectAllAuthors.map((item,index)=>{
+              return(<Option value={item.id+''} key={index}>{item.name}</Option>)
+            })
+          }
+          </Select>
+          )}
+        </FormItem>
 
+        <FormItem label='尺寸：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('size', { 
+            initialValue: item.size || undefined,
+              validate: [{
+                rules: [
+                  { required: true, message: '不能为空' }
+                ],
+                trigger: ['onBlur', 'onChange']
+              }]
+          })(
+            <Input/>
+          )}
+        </FormItem>
 
         <FormItem label='语音：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('voice', { 
-            initialValue: item.voice || undefined 
+            initialValue: item.voice || undefined,
+              validate: [{
+                rules: [
+                  { required: true, message: '不能为空' }
+                ],
+                trigger: ['onBlur', 'onChange']
+              }]
           })(
             <Input/>
           )}
@@ -186,7 +200,13 @@ function Pop ({ form, item, type, visible, onOk, onCancel,selectAllAuthors }) {
 
         <FormItem label='年份：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('year', { 
-            initialValue: item.year || undefined
+            initialValue: item.year || undefined,
+              validate: [{
+                rules: [
+                  { required: true, message: '不能为空' }
+                ],
+                trigger: ['onBlur', 'onChange']
+              }]
           })(
             <Input/>
           )}
@@ -194,7 +214,13 @@ function Pop ({ form, item, type, visible, onOk, onCancel,selectAllAuthors }) {
 
         <FormItem label='颜色：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('color', { 
-            initialValue: item.color || undefined
+            initialValue: item.color || undefined,
+              validate: [{
+                rules: [
+                  { required: true, message: '不能为空' }
+                ],
+                trigger: ['onBlur', 'onChange']
+              }]
           })(
             <Input/>
           )}

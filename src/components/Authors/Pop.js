@@ -23,14 +23,6 @@ const uploadProp = {
   action: "http://localhost:3000/api/upload",
   listType: "picture"
 }
-// ,
-//   defaultFileList: [{
-//       uid: -1,
-//       name: 'xxx.png',
-//       status: 'done',
-//       url: item.avator ,
-//       thumbUrl: item.avator ,
-//     }]
 
 function Pop ({ form, item, type, visible, onOk, onCancel }) {
   const { getFieldDecorator, validateFields, getFieldsValue, setFieldsValue,resetFields } = form
@@ -60,13 +52,10 @@ function Pop ({ form, item, type, visible, onOk, onCancel }) {
       
 
   function handleOk () {
-    console.log(getFieldsValue())
     validateFields((errors) => {
       if (!!errors) {
         return
       }
-      console.log('验证通过')
-      console.log(getFieldsValue())
       onOk({...getFieldsValue()})
       resetFields()
     })
@@ -92,7 +81,6 @@ function Pop ({ form, item, type, visible, onOk, onCancel }) {
     onCancel: handleCancel
   }
 
-// console.log(item.avator)
 
 function q (){
   if(item.avator){

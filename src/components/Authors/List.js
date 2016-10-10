@@ -38,14 +38,6 @@ const List = ({ total, current, loading, dataSource, onPageChange, onDeleteItem,
     dataIndex: 'introduce',
     key: 'introduce',
   }, {
-    title: '创建时间',
-    dataIndex: 'createdAt',
-    key: 'createdAt',
-  }, {
-    title: '更新时间',
-    dataIndex: 'updatedAt',
-    key: 'updatedAt',
-  }, {
     title: '操作',
     key: 'operation',
     render: (text, record) => (

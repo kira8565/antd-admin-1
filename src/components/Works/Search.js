@@ -20,34 +20,7 @@ const Search = ({form, onSearch, onAdd, field, keyword}) => {
   return (
     <div className={styles.normal}>
       <div className={styles.search}>
-        <Form inline onSubmit={handleSubmit}>
-          <FormItem>
-            {getFieldDecorator('field', {
-                initialValue: field || 'name',
-              })(
-                <Select style={{ width: 65 }}>
-                  <Option value='name'>
-                    姓名
-                  </Option>
-                  <Option value='sex'>
-                    性别
-                  </Option>
-                </Select>
-              )}
-            </FormItem>
-          <FormItem hasFeedback style={{marginBottom: 0}}>
-            {getFieldDecorator('keyword', {
-              initialValue: keyword || ''
-             })(
-               <Input placeholder='完整关键词' />
-             )}
-          </FormItem>
-          <FormItem>
-            <Button style={{ marginRight: '10px' }} type='primary' htmlType='submit'>
-              搜索
-            </Button>
-          </FormItem>
-        </Form>
+ 
       </div>
       <div>
         <Button type='ghost' size='large' onClick={onAdd}>

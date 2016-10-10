@@ -45,7 +45,34 @@ const WorksPage = ({ location, dispatch, works}) => {
     }
   }
 
-
+  const listProps = {
+    dataSource: list,
+    loading,
+    total,
+    current,
+    onPageChange(page) {
+      dispatch(routerRedux.push({
+        pathname: '/works',
+        query: { page}
+      }))
+    },
+    onDeleteItem(id) {
+      console.log(id)
+      dispatch({
+        type: 'works/delete',
+        payload: id
+      })
+    },
+    onEditItem(item) {
+      dispatch({
+        type: 'works/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item
+        }
+      })
+    }
+  }
 
 
 
@@ -55,7 +82,7 @@ const WorksPage = ({ location, dispatch, works}) => {
     <div>
       <Search {...searchProps} />
       <Pop {...popProps} />
-      <List />
+      <List {...listProps} />
     </div>
   )
 }
