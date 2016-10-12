@@ -14,6 +14,7 @@ const Sidebar = ({ active }) => {
           <SubMenu key="sub1" title={<span><Icon type="desktop" />基础功能</span>}>
             <Menu.Item key="/authors"><Link to="/authors">作者管理</Link></Menu.Item>
             <Menu.Item key="/works"><Link to="/works">作品管理</Link></Menu.Item>
+            <Menu.Item key="/beacons"><Link to="/beacons">beacon管理</Link></Menu.Item>
           </SubMenu>
         </Menu>
     </div>
