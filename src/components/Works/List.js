@@ -22,13 +22,17 @@ const List = ({ total, current, loading, dataSource, onPageChange, onDeleteItem,
     dataIndex: 'name',
     key: 'name',
   }, {
-    title: '作品材质',
-    dataIndex: 'material',
-    key: 'material',
-  }, {
     title: '作者',
     dataIndex: 'author',
     key: 'author',
+  }, {
+    title: 'uuid',
+    dataIndex: 'uuid',
+    key: 'uuid',
+  }, {
+    title: '作品材质',
+    dataIndex: 'material',
+    key: 'material',
   }, {
     title: '尺寸',
     dataIndex: 'size',

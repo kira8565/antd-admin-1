@@ -1,9 +1,39 @@
 import React, { Component, PropTypes } from 'react';
-import { Table, Popconfirm } from 'antd'
+import { Table, Popconfirm ,Button} from 'antd'
 import { connect } from 'dva';
+import styles from './BeaconsPage.less'
+import Pop from '../components/Beacons/Pop'
 
 function BeaconsPage({ location, dispatch, beacons}) {
-    const {list, loading} = beacons
+    const {list, loading, modalVisible} = beacons
+
+    function onAdd() {
+      dispatch({
+        type: 'beacons/showModal'
+      })
+    }
+    function onDeleteItem(device_id){
+      dispatch({
+        type: 'beacons/delete',
+        payload: device_id
+      })
+    }
+
+
+    const popProps = {
+      visible: modalVisible,
+      onOk(data) {
+        dispatch({
+          type: 'beacons/add',
+          payload: data.device_id
+        })
+      },
+      onCancel() {
+        dispatch({
+          type: 'beacons/hideModal'
+        })
+      }
+    }
 
   const columns = [
     {
@@ -43,8 +73,6 @@ function BeaconsPage({ location, dispatch, beacons}) {
     key: 'operation',
     render: (text, record) => (
       <p>
-        <a onClick={() => onEditItem(record)}>编辑</a>
-        &nbsp;
         <Popconfirm title="确定要删除吗？" onConfirm={() => onDeleteItem(record.device_id)}>
           <a>删除</a>
         </Popconfirm>
@@ -54,6 +82,15 @@ function BeaconsPage({ location, dispatch, beacons}) {
 
   return (
     <div>
+      <div className={styles.normal}>
+        <div className={styles.search}>
+        </div>
+        <div>
+          <Button type='ghost' size='large' onClick={onAdd}>
+            添加
+          </Button>
+        </div>
+      </div>
       <Table
         bordered
         size="small"
@@ -62,7 +99,9 @@ function BeaconsPage({ location, dispatch, beacons}) {
         loading={loading}
         rowKey={record => record.device_id}
         pagination={false}
+        className={styles.table}
       />
+      <Pop {...popProps} />
     </div>
   );
 }

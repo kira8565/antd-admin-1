@@ -170,6 +170,20 @@ function Pop ({ form, item, type, visible, onOk, onCancel,selectAllAuthors }) {
           )}
         </FormItem>
 
+        <FormItem label='uuid：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('uuid', { 
+            initialValue: item.uuid || undefined,
+              validate: [{
+                rules: [
+                  { required: true, message: '不能为空' }
+                ],
+                trigger: ['onBlur', 'onChange']
+              }]
+          })(
+            <Input/>
+          )}
+        </FormItem>
+
         <FormItem label='尺寸：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('size', { 
             initialValue: item.size || undefined,
