@@ -71,7 +71,7 @@ function Pop ({ form, item, type, visible, onOk, onCancel,selectAllAuthors }) {
       if (!!errors) {
         return
       }
-      onOk({...getFieldsValue()})
+      onOk({...getFieldsValue(), fake:''})
       resetFields()
     })
   }
