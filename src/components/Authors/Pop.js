@@ -20,7 +20,7 @@ const uploadProp = {
     }
     return isJPG;
   },
-  action: "http://localhost:3000/api/upload",
+  action: "/api/upload",
   listType: "picture"
 }
 
