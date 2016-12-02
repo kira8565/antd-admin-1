@@ -12,18 +12,19 @@ const Layout = ({ location, dispatch, layout, children }) => {
 const { fold } = layout;
 
   const siderProps = {
-    fold,
-    onFold(fold) {
-      dispatch({
-        type: 'layout/fold',
-        payload: {
-          fold
-        }
-      });
-    }
+    fold
   }
 
-
+  const headerProps= {
+      onFold(fold) {
+        dispatch({
+          type: 'layout/fold',
+          payload: {
+            fold
+          }
+        });
+      }
+  }
 
 
 
@@ -32,7 +33,7 @@ const { fold } = layout;
     <div className={styles.main}>
         <Sider {...siderProps}/>
         <div className={styles.container}>
-          <Header/>
+          <Header {...headerProps}/>
           <div className={styles.box}>
             <div  className={styles.content}>
               {children}
