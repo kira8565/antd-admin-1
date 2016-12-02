@@ -1,10 +1,11 @@
 import React from 'react';
+import styles from './header.less';
 
 const Header = (props) => {
   return (
-    <div>
+    <header>
       Header
-    </div>
+    </header>
   );
 };
 

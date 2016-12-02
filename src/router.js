@@ -1,13 +1,17 @@
 import React, { PropTypes } from 'react';
-import { Router, Route, IndexRoute, Link } from 'dva/router';
+import { Router, Route, IndexRoute, Link, IndexRedirect  } from 'dva/router';
 
 
 import Layout from './routes/layout';
+import Dashbord from './routes/dashbord';
 
 export default function ({ history }) {
   return (
     <Router history={history}>
-      <Route path="/" component={Layout} />
+      <Route path="/" component={Layout} >
+        <IndexRedirect to="dashbord" />
+        <Route path='dashbord' component={Dashbord} />
+      </Route>
     </Router>
   );
 };
