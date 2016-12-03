@@ -9,6 +9,14 @@ export default {
 
   subscriptions: {
     setup({ dispatch, history }) {
+      if(localStorage.getItem('fold') === 'false'){
+        dispatch({
+          type: 'foldSuccess',
+          payload: {
+            fold: false
+          }
+        });
+      }
     },
   },
 
@@ -20,6 +28,7 @@ export default {
 
   reducers: {
     foldSuccess(state, action) {
+      localStorage.setItem('fold', action.payload.fold)
       return { ...state, ...action.payload};
     },
   },

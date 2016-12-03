@@ -1,44 +1,41 @@
-
-.aside {
-    background: #404040;
-    position: absolute;
-    width: 240px;
-    height: 100%;
+.hide {
+    display: none;
 }
 
 .logo {
-    text-align: center;
-    height: 40px;
-    line-height: 40px;
+    height: 50px;
+    line-height: 50px;
     cursor: pointer;
-    margin: 28px 0;
-    overflow: hidden;
-
-    img {
-        width: 40px;
-        margin-right: 8px;
-    }
-
-    span {
-        vertical-align: text-bottom;
-        font-size: 16px;
-        text-transform: uppercase;
+    background: #2f2f2f;
+    padding-left: 20px;
+    &__img {
+        width: 30px;
+        height: 30px;
         display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+    &__text {
+        font-size: 16px;
+        vertical-align: middle;
     }
 }
 
 
 
 .collapse{
-    color: red;
-    width: 100px;
-
-    div>span {
+    i {
+        transition: font-size 0.3s linear;
+    }
+    
+    &.active{
         i {
-            font-size: 20px;
-        }
-        span {
-            display: none;
+            font-size: 16px;
+            vertical-align: middle;
+            display: inline-block;
         }
     }
 }
+
+
+

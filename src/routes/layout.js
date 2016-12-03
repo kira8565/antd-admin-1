@@ -5,6 +5,7 @@ import styles from './layout.less';
 import Sider from '../components/layout/sider';
 import Header from '../components/layout/header';
 import Footer from '../components/layout/footer';
+import classnames from 'classnames';
 
 
 const Layout = ({ location, dispatch, layout, children }) => {
@@ -16,22 +17,25 @@ const { fold } = layout;
   }
 
   const headerProps= {
-      onFold(fold) {
-        dispatch({
-          type: 'layout/fold',
-          payload: {
-            fold
-          }
-        });
-      }
+    fold,
+    onFold(fold) {
+      dispatch({
+        type: 'layout/fold',
+        payload: {
+          fold
+        }
+      });
+    }
   }
 
 
 
 
   return (
-    <div className={styles.main}>
-        <Sider {...siderProps}/>
+    <div className={classnames(styles.main,{[styles.fold]:fold})}>
+        <aside className={styles.aside}>
+            <Sider {...siderProps}/>
+        </aside>
         <div className={styles.container}>
           <Header {...headerProps}/>
           <div className={styles.box}>

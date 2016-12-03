@@ -1,5 +1,20 @@
 
+.aside {
+    background: #404040;
+    position: absolute;
+    width: 240px;
+    height: 100%;
+    transition: all 0.3s ease;
+}
 
+.fold {
+    .aside {
+        width: 80px;
+    }
+    .container {
+        margin-left: 80px;
+    }
+}
 
 .main {
     background: #ececec;
@@ -9,6 +24,7 @@
     overflow: auto;
     height: 100vh;
     margin-left: 240px;
+    transition: all 0.3s ease;
 }
 
 .box {

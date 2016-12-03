@@ -1,19 +1,19 @@
 import React from 'react';
 import styles from './header.less';
-import { Icon, Switch } from 'antd';
+import { Icon } from 'antd';
 
-const Header = ({onFold}) => {
+const Header = ({fold, onFold}) => {
 
 
-  function changeMode(v){
-    onFold(v);
+  function changeMode(){
+    onFold(!fold);
   }
 
 
   return (
     <header className={styles.header}>
       <div className={styles.nav__start}>
-        <Switch onChange={changeMode} />
+        <div className={styles.nav__collapse} onClick={changeMode}>button{fold+'.'}</div>
       </div>
       <section className={styles.nav__center}>
         <div className={styles.nav__menu}>

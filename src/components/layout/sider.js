@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './sider.less';
+import logo from '../../assets/logo.png';
+import classnames from 'classnames';
 
 import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
@@ -13,17 +15,18 @@ const Sider = ({fold}) => {
   }
 
   return (
-    <aside className={styles.aside}>
+    <div className={classnames(styles.collapse,{[styles.active]:fold})}>
         <div className={styles.logo}>
-          <img src={'https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg'}/>
-          <span>text</span>
+          <img className={styles.logo__img} src={logo}/>
+          <span className={classnames(styles.logo__text, {[styles.hide]:fold})}></span>
         </div>
+
         <Menu
           {...menuProps}
-          mode={fold?'inline' : 'vertical'}
+          mode={fold?'vertical':'inline'}
         >
-          <Menu.Item key="home"><Icon type="home" />仪表盘</Menu.Item>
-          <SubMenu key="sub" title={<span><Icon type="appstore" /><span className="text">Navigation Two</span></span>}>
+          <Menu.Item key="home"><Icon type="home" />{fold?'':'仪表盘'}</Menu.Item>
+          <SubMenu key="sub" title={<span><Icon type="appstore-o" />{fold?'':'多层菜单'}</span>}>
             <Menu.Item key="5">Option 5</Menu.Item>
             <Menu.Item key="6">Option 6</Menu.Item>
             <SubMenu key="sub3" title="Submenu">
@@ -31,12 +34,8 @@ const Sider = ({fold}) => {
               <Menu.Item key="8">Option 8</Menu.Item>
             </SubMenu>
           </SubMenu>
-          <Menu.Item key="laptop"><Icon type="laptop" />laptop</Menu.Item>
-          <Menu.Item key="notification"><Icon type="notification" />notification</Menu.Item>
-          <Menu.Item key="folder"><Icon type="folder" />folder</Menu.Item>
-          <Menu.Item key="user"><Icon type="user" />user</Menu.Item>
         </Menu>
-    </aside>
+    </div>
   );
 };
 
