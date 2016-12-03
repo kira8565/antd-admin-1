@@ -13,7 +13,9 @@ const Header = ({fold, onFold}) => {
   return (
     <header className={styles.header}>
       <div className={styles.nav__start}>
-        <div className={styles.nav__collapse} onClick={changeMode}>button{fold+'.'}</div>
+        <div className={styles.nav__collapse} onClick={changeMode}>
+          
+        </div>
       </div>
       <section className={styles.nav__center}>
         <div className={styles.nav__menu}>
