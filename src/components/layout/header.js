@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './header.less';
 import { Icon } from 'antd';
+import classnames from 'classnames';
 
 const Header = ({fold, onFold}) => {
 
@@ -13,8 +14,8 @@ const Header = ({fold, onFold}) => {
   return (
     <header className={styles.header}>
       <div className={styles.nav__start}>
-        <div className={styles.nav__collapse} onClick={changeMode}>
-          
+        <div className={styles.nav__collapse}>
+          <span className={classnames(styles.menu, {[styles.active]:fold})} onClick={changeMode}><span></span></span>
         </div>
       </div>
       <section className={styles.nav__center}>

@@ -8,15 +8,98 @@
 .nav__start {
     width: 280px;
     height: 50px;
+    
     flex: 0 0 auto;
     align-self: center;
 }
 
 .nav__collapse {
-    width: 100px;
+    width: 50px;
     height: 50px;
-    background: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+/*fuxk*/
+
+.menu {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 26px;
+    background: #108ee9;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.menu span {
+	margin: 0 auto;
+	position: relative;
+	top: 12px;
+    transition-duration: 0s;
+    transition-delay: 0.2s;
+}
+.menu span:before, .menu span:after {
+	position: absolute;
+	content: '';
+}
+.menu span, .menu span:before, .menu span:after {
+	width: 20px;
+	height: 2px;
+	background-color: #fff;
+	display: block;
+}
+.menu span:before {
+	margin-top: -6px;
+	transition-property: margin, transform;
+	transition-duration: 0.2s;
+	transition-delay: 0.2s, 0s;
+}
+.menu span:after {
+	margin-top: 6px;
+	transition-property: margin, transform;
+	transition-duration: 0.2s;
+	transition-delay: 0.2s, 0s;
+}
+
+.menu {
+    &.active {
+        span {
+            background-color: rgba(0,0,0,0.0);
+            transition-delay: 0.2s;
+        }
+        span:before {
+            margin-top: 0;
+            transform: rotate(45deg);
+            transition-delay: 0s, 0.2s;
+        }
+        span:after {
+            margin-top: 0;
+            transform: rotate(-45deg);
+            transition-delay: 0s, 0.2s;
+        }
+    }
+}
+
+
+
+
+
+
+/*fuxk*/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .nav__center {
     display: flex;
