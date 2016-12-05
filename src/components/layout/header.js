@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './header.less';
-import { Icon } from 'antd';
+import { Icon, Badge } from 'antd';
 import classnames from 'classnames';
 
 const Header = ({fold, onFold}) => {
@@ -32,7 +32,14 @@ const Header = ({fold, onFold}) => {
       <ul className={styles.nav__end}>
         <li><Icon type="user" /></li>
         <li><Icon type="search" /></li>
-        <li><Icon type="message" /></li>
+        <li>  
+          <Badge dot>
+            <Icon type="message" />
+          </Badge>
+        </li>
+  
+  
+  
         <li><Icon type="setting" /></li>
         <li><Icon type="logout" /></li>
       </ul>
