@@ -167,7 +167,7 @@ const data = [
             </Col>
             <Col lg={6}>
               <Progress percent={30} />
-              23333
+              test
             </Col>
           </Row>
         </CardBd>
