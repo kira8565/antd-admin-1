@@ -1,16 +1,3 @@
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-
 .container {
     width: 100%;
     height: 100%;
@@ -36,12 +23,11 @@
         left: 0;
         width: 100%;
         height: 6px;
-        background: linear-gradient(270deg, #2196f3, #9acffa);
+        background: #108ee9;
         background-size: 400% 400%;
-        animation: gradient 2s ease infinite;
     }
     input {
-        padding-left: 20px;
+        padding-left: 22px;
     }
     button {
         width: 100%;
@@ -71,3 +57,15 @@
     }
 }
 
+.copyright {
+    text-align: center;
+    line-height: 60px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fcfcfd;
+    margin: 0;
+    color: #999;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.08);
+}

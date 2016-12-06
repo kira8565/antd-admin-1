@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './sider.less';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo1.jpg';
 import classnames from 'classnames';
 
 import { Menu, Icon } from 'antd';

@@ -4,7 +4,7 @@ import styles from './login.less';
 
 import { Button, Form, Input, Icon, notification } from 'antd'
 const FormItem = Form.Item
-
+import logo from '../../assets/logo1.jpg';
 
 const args = {
     message: '登录试试',
@@ -31,7 +31,7 @@ const Login = ({ logining, form, onLogin }) => {
       <div className={styles.container}>
         <div className={styles.box}>
         <div className={styles.title}>
-            <span>管理员登录</span>
+            <img src={logo} width="50"/>
         </div>
         <Form horizontal onSubmit={handleSubmit}>
             <FormItem hasFeedback>
@@ -67,6 +67,7 @@ const Login = ({ logining, form, onLogin }) => {
             </FormItem>
         </Form>
         </div>
+        <p className={styles.copyright}>Ant Design 版权所有 © 2015 由蚂蚁金服体验技术部支持</p>
     </div>
   )
 }
