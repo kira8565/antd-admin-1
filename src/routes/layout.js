@@ -6,14 +6,27 @@ import Sider from '../components/layout/sider';
 import Header from '../components/layout/header';
 import Footer from '../components/layout/footer';
 import classnames from 'classnames';
+import Login from '../components/layout/login';
 
 
 const Layout = ({ location, dispatch, layout, children }) => {
 
-const { fold } = layout;
+  const { fold, logined, logining } = layout;
 
   const siderProps = {
     fold
+  }
+
+  const loginProps = {
+    logining,
+    onLogin({ account, password }) {
+      dispatch({
+        type: 'layout/login',
+        payload: {
+          account,
+        password}
+      })
+    }
   }
 
   const headerProps= {
@@ -29,24 +42,27 @@ const { fold } = layout;
   }
 
 
-
-
+  if (!logined) {
+    return <Login {...loginProps} />
+  }
   return (
-    <div className={classnames(styles.main,{[styles.fold]:fold})}>
-        <aside className={styles.aside}>
-            <Sider {...siderProps}/>
-        </aside>
-        <div className={styles.container}>
-          <Header {...headerProps}/>
-          <div className={styles.box}>
-            <div  className={styles.content}>
-              {children}
+      <div className={classnames(styles.main,{[styles.fold]:fold})}>
+          <aside className={styles.aside}>
+              <Sider {...siderProps}/>
+          </aside>
+          <div className={styles.container}>
+            <Header {...headerProps}/>
+            <div className={styles.box}>
+              <div  className={styles.content}>
+                {children}
+              </div>
             </div>
+            <Footer/>
           </div>
-          <Footer/>
-        </div>
-    </div>
+      </div>
   );
+
+
 }
 
 Layout.propTypes = {
