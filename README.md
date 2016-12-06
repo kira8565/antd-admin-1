@@ -5,7 +5,7 @@ live demo: http://ouzz.me/antd-admin/
 
 ## 截屏
 
-![](assets/view1.png)
+![](src/assets/view1.png)
 
-![](assets/view2.png)
+![](src/assets/view2.png)
 
