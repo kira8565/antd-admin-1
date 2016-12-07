@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'dva';
+import { BackTop, Icon } from 'antd';
 
 import styles from './layout.less';
 import Sider from '../components/layout/sider';
@@ -47,10 +48,14 @@ const Layout = ({ location, dispatch, layout, children }) => {
   }
   return (
       <div className={classnames(styles.main,{[styles.fold]:fold})}>
+          <BackTop className={styles.backtop} visibilityHeight={10}>
+            <Icon type="up" />
+          </BackTop>
           <aside className={styles.aside}>
               <Sider {...siderProps}/>
           </aside>
           <div className={styles.container}>
+            
             <Header {...headerProps}/>
             <div className={styles.box}>
               <div  className={styles.content}>

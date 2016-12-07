@@ -1,5 +1,6 @@
 .hide {
     display: none;
+    transition: all .3s cubic-bezier(.215,.61,.355,1);
 }
 
 .logo {
@@ -8,6 +9,7 @@
     cursor: pointer;
     background: #2f2f2f;
     padding-left: 20px;
+    overflow: hidden;
     &__img {
         width: 30px;
         height: 30px;
@@ -24,9 +26,9 @@
 
 
 .collapse{
-    i {
-        transition: font-size 0.3s linear;
-    }
+    // i {
+    //     transition: all .3s cubic-bezier(.215,.61,.355,1);
+    // }
     
     &.active{
         i {

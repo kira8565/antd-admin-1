@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import styles from './dashbord.less';
-import { Row, Col, Icon, Progress, Tag } from 'antd';
+import { Row, Col, Icon, Progress, Tag, Timeline } from 'antd';
 import {ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, Bar, Line } from 'recharts';
 import Card from '../components/common/card';
 import { Button } from 'antd';
@@ -15,7 +15,7 @@ const columns = [{
   title: 'Name',
   dataIndex: 'name',
   key: 'name',
-  render: text => <a href="#">{text}</a>,
+  render: text => <Tag color="#87d068">{text}</Tag>,
 }, {
   title: 'Age',
   dataIndex: 'age',
@@ -29,7 +29,7 @@ const columns = [{
   key: 'action',
   render: (text, record) => (
     <span>
-      <a href="#">{record.name}</a>
+      {record.name}<Icon type="arrow-up" />
     </span>
   ),
 }];
@@ -71,7 +71,6 @@ const data = [
 ];
   return (
     <div className={styles.normal}>
-
       <Row gutter={30}>
         <Col lg={6}>
           <Card >
@@ -180,7 +179,7 @@ const data = [
               <Icon type="close" />
             </CardHd>
             <CardBd>
-              <Table columns={columns} dataSource={data2} size="middle"/>
+              <Table columns={columns} dataSource={data2} size="middle" className={styles.list}/>
             </CardBd>
           </Card>
         </Col>
@@ -190,7 +189,20 @@ const data = [
               <Icon type="close" />
             </CardHd>
             <CardBd>
-
+              <Timeline>
+                <Timeline.Item color="green">Create a services site 2015-09-01</Timeline.Item>
+                <Timeline.Item color="green">Create a services site 2015-09-01</Timeline.Item>
+                <Timeline.Item color="red">
+                  <p>Solve initial network problems 1</p>
+                  <p>Solve initial network problems 2</p>
+                  <p>Solve initial network problems 3 2015-09-01</p>
+                </Timeline.Item>
+                <Timeline.Item>
+                  <p>Technical testing 1</p>
+                  <p>Technical testing 2</p>
+                  <p>Technical testing 3 2015-09-01</p>
+                </Timeline.Item>
+              </Timeline>
             </CardBd>
           </Card>
         </Col>
@@ -200,7 +212,10 @@ const data = [
               <Icon type="close" />
             </CardHd>
             <CardBd>
- 
+ 1
+            </CardBd>
+            <CardBd>
+ 2
             </CardBd>
           </Card>
         </Col>

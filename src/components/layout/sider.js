@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './sider.less';
-import logo from '../../assets/logo1.jpg';
+import logo from '../../assets/logo2.png';
 import classnames from 'classnames';
 
 import { Menu, Icon } from 'antd';
@@ -18,7 +18,7 @@ const Sider = ({fold}) => {
     <div className={classnames(styles.collapse,{[styles.active]:fold})}>
         <div className={styles.logo}>
           <img className={styles.logo__img} src={logo}/>
-          <span className={classnames(styles.logo__text, {[styles.hide]:fold})}></span>
+          {fold?'':<span className={styles.logo__text}>Logo</span>}
         </div>
 
         <Menu

@@ -4,16 +4,16 @@ import styles from './login.less';
 
 import { Button, Form, Input, Icon, notification } from 'antd'
 const FormItem = Form.Item
-import logo from '../../assets/logo1.jpg';
+import logo from '../../assets/logo1.png';
 
-const args = {
-    message: '登录试试',
-    description: '账号: admin 密码: admin',
-    duration: 0,
-};
-setTimeout(()=>{
-    notification.open(args);
-}, 1000)
+// const args = {
+//     message: '登录试试',
+//     description: '账号: admin 密码: admin',
+//     duration: 0,
+// };
+// setTimeout(()=>{
+//     notification.open(args);
+// }, 1000)
 
 const Login = ({ logining, form, onLogin }) => {
   const { getFieldDecorator, validateFields, getFieldsValue } = form
